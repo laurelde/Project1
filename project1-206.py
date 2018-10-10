@@ -3,6 +3,7 @@ import filecmp
 from dateutil.relativedelta import *
 from datetime import date
 
+# TEST COMMIT 
 
 def getData(file):
 # get a list of dictionary objects from the file
