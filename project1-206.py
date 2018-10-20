@@ -10,14 +10,28 @@ def getData(file):
 #Input: file name
 #Ouput: return a list of dictionary objects where
 #the keys are from the first row in the data. and the values are each of the other rows
+	data = []
+	doc = open(file, 'r')
+	keys = doc.readline()
+	for line in doc:
+		line = line.split(",")
+		student = dict()
+		student["First"] = line[0]
+		student["Last"] = line[1]
+		student["Email"] = line[2]
+		student["Class"] = line[3]
+		student["DOB"] = line[4]
 
-	pass
+		data.append(student)
+	doc.close()
+	return data
+	
 
 def mySort(data,col):
 # Sort based on key/column
 #Input: list of dictionaries and col (key) to sort on
 #Output: Return the first item in the sorted list as a string of just: firstName lastName
-
+	
 	pass
 
 
