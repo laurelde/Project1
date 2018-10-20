@@ -31,8 +31,10 @@ def mySort(data,col):
 # Sort based on key/column
 #Input: list of dictionaries and col (key) to sort on
 #Output: Return the first item in the sorted list as a string of just: firstName lastName
-	
-	pass
+	sortedData = sorted(data, key=lambda k: k[col])
+	topPerson = sortedData[0]
+	return (topPerson["First"] + " " + topPerson["Last"])
+
 
 
 def classSizes(data):
@@ -41,16 +43,52 @@ def classSizes(data):
 # Output: Return a list of tuples sorted by the number of students in that class in
 # descending order
 # [('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)]
+	freshCount = 0
+	sophCount = 0
+	juniorCount = 0
+	senCount = 0
 
-	pass
-
+	for item in data: 
+		if item["Class"] == "Freshman":
+			freshCount += 1
+		elif item["Class"] == "Sophomore":
+			sophCount += 1
+		elif item["Class"] == "Junior":
+			juniorCount += 1
+		else: 
+			senCount += 1
+	countList = list()
+	freshTuple = ("Freshman", freshCount)
+	countList.append(freshTuple)
+	sophTuple = ("Sophomore", sophCount)
+	countList.append(sophTuple)
+	junTuple = ("Junior", juniorCount)
+	countList.append(junTuple)
+	senTuple = ("Senior", senCount)
+	countList.append(senTuple)
+	sortedList = sorted(countList, key=lambda k: k[1], reverse=True)
+	return sortedList
 
 def findMonth(a):
 # Find the most common birth month form this data
 # Input: list of dictionaries
 # Output: Return the month (1-12) that had the most births in the data
+	months = {'1':0, '2':0, '3':0, '4':0, '5':0, '6':0, '7':0, '8':0, 
+		'9':0, '10':0, '11':0, '12':0}
 
-	pass
+	for student in a:
+		DOB = student["DOB"]
+		#print("date: " + str(DOB))
+		dateList = DOB.split("/")
+		month = dateList[0]
+		#print("Month: " + month)
+		months[month] += 1
+		#print(months)
+	print(months)
+
+	sortedMonths = sorted(months, key=lambda k: (int(k[])), reverse=True)
+	return sortedMonths[0][0]
+
 
 def mySortPrint(a,col,fileName):
 #Similar to mySort, but instead of returning single
@@ -89,6 +127,11 @@ def test(got, expected, pts):
 
 # Provided main() calls the above functions with interesting inputs, using test() to check if each result is correct or not.
 def main():
+
+	data = getData('P1DataA.csv')
+	print("Type of Data: ")
+	mySort(data,'First')
+
 	total = 0
 	print("Read in Test data and store as a list of dictionaries")
 	data = getData('P1DataA.csv')
