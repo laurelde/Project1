@@ -36,7 +36,6 @@ def mySort(data,col):
 	return (topPerson["First"] + " " + topPerson["Last"])
 
 
-
 def classSizes(data):
 # Create a histogram
 # Input: list of dictionaries
@@ -73,21 +72,19 @@ def findMonth(a):
 # Find the most common birth month form this data
 # Input: list of dictionaries
 # Output: Return the month (1-12) that had the most births in the data
-	months = {'1':0, '2':0, '3':0, '4':0, '5':0, '6':0, '7':0, '8':0, 
-		'9':0, '10':0, '11':0, '12':0}
-
+	months = {}
+	lineNum = 1
 	for student in a:
-		DOB = student["DOB"]
-		#print("date: " + str(DOB))
-		dateList = DOB.split("/")
-		month = dateList[0]
-		#print("Month: " + month)
-		months[month] += 1
-		#print(months)
-	print(months)
-
-	sortedMonths = sorted(months, key=lambda k: (int(k[])), reverse=True)
-	return sortedMonths[0][0]
+		date = student["DOB"]
+		date = date.split('/')
+		month = date[0]
+		if month in months: 
+			months[month] += 1
+		else:
+			months[month] = 1
+	sortedMonths = sorted(months.items(), key=lambda k: k[1], reverse=True)
+	topMonth = sortedMonths[0]
+	return int(topMonth[0])
 
 
 def mySortPrint(a,col,fileName):
@@ -96,8 +93,14 @@ def mySortPrint(a,col,fileName):
 # as fist,last,email
 #Input: list of dictionaries, col (key) to sort by and output file name
 #Output: No return value, but the file is written
-
-	pass
+	sortedData = sorted(a, key=lambda k: k[col])
+	newFile = open(fileName, 'w')
+	for item in sortedData: 
+		first = item["First"]
+		last = item["Last"]
+		email = item["Email"]
+		newFile.write(first + "," + last + "," + email + '\n')
+	newFile.close
 
 def findAge(a):
 # def findAge(a):
