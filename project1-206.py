@@ -1,7 +1,8 @@
 import os
 import filecmp
 from dateutil.relativedelta import *
-from datetime import date
+import datetime 
+from datetime import date, timedelta
 
 # TEST COMMIT 
 
@@ -108,8 +109,20 @@ def findAge(a):
 # Output: Return the average age of the students and round that age to the nearest
 # integer.  You will need to work with the DOB and the current date to find the current
 # age in years.
-
-	pass
+	numStudents = 0
+	totalAge = 0
+	today = datetime.date.today()
+	for student in a:
+		numStudents += 1
+		birthDate = student["DOB"]
+		birthDate = birthDate.split("/")
+		year = int(birthDate[2])
+		month = int(birthDate[0])
+		day = int(birthDate[1])
+		date = datetime.date(year, month, day)
+		age = (today - date) / timedelta(365.2425)
+		totalAge += age
+	return int(totalAge/numStudents)
 
 
 ################################################################
